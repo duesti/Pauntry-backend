@@ -23,4 +23,43 @@ class InternalServerError extends HttpError {
 	}
 }
 
-export { HttpError, InternalServerError };
+class RequestEntityTooLargeError extends HttpError {
+	constructor(
+		detail?: string,
+		instance?: string,
+		type?: string,
+		title: string = "Размер отправляемых данных слишком большой",
+	) {
+		super(413, title, detail, instance, type);
+	}
+}
+
+class BadRequestError extends HttpError {
+	constructor(
+		detail?: string,
+		instance?: string,
+		type?: string,
+		title: string = "Ошибка на стороне клиента",
+	) {
+		super(400, title, detail, instance, type);
+	}
+}
+
+class NotFoundError extends HttpError {
+	constructor(
+		detail?: string,
+		instance?: string,
+		type?: string,
+		title: string = "Не найдено",
+	) {
+		super(404, title, detail, instance, type);
+	}
+}
+
+export {
+	HttpError,
+	InternalServerError,
+	RequestEntityTooLargeError,
+	BadRequestError,
+	NotFoundError,
+};

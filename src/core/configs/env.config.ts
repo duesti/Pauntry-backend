@@ -2,8 +2,17 @@ import { z } from "zod";
 import { logger } from "@/utils/logger";
 
 const envSchema = z.object({
-	HOSTNAME: z.string().min(1, "Переменная HOSTNAME не может быть пустой."),
-	PORT: z.coerce.number().min(1, "Переменная PORT не может быть пустой"),
+	// Server
+	HOSTNAME: z.string().min(1),
+	PORT: z.coerce.number().min(1),
+
+	// S3 Storage
+	S3_ENDPOINT: z.string().min(1),
+	S3_REGION: z.string().min(1),
+	S3_ACCESS_KEY: z.string().min(1),
+	S3_SECRET_KEY: z.string().min(1),
+	S3_BUCKET_NAME: z.string().min(1),
+	S3_PUBLIC_ENDPOINT: z.string().min(1),
 });
 
 const envParsed = envSchema.safeParse(Bun.env);
