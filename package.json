@@ -1,33 +1,41 @@
 {
-  "name": "pauntry-backend",
-  "module": "index.ts",
-  "type": "module",
-  "private": true,
-  "scripts": {
-    "dev": "bun src/app.ts"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^2.4.4",
-    "@types/bun": "latest",
-    "@types/pg": "^8.18.0",
-    "prisma": "^7.4.2",
-    "tsx": "^4.21.0"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
-  "dependencies": {
-    "@aws-sdk/client-s3": "^3.1000.0",
-    "@hono/node-server": "^1.19.9",
-    "@hono/zod-validator": "^0.7.6",
-    "@prisma/adapter-pg": "^7.4.2",
-    "@prisma/client": "^7.4.2",
-    "aws-sdk-client-mock": "^4.1.0",
-    "consola": "^3.4.2",
-    "dotenv": "^17.3.1",
-    "hono": "^4.12.3",
-    "node": "^25.7.0",
-    "pg": "^8.19.0",
-    "zod": "^4.3.6"
-  }
+	"name": "pauntry-backend",
+	"module": "index.ts",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"dev": "bun src/app.ts",
+		"prepare": "husky"
+	},
+	"lint-staged": {
+		"*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
+			"biome check --write --no-errors-on-unmatched"
+		]
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.4",
+		"@types/bun": "latest",
+		"@types/pg": "^8.18.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.3.1",
+		"prisma": "^7.4.2",
+		"tsx": "^4.21.0"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"dependencies": {
+		"@aws-sdk/client-s3": "^3.1000.0",
+		"@hono/node-server": "^1.19.9",
+		"@hono/zod-validator": "^0.7.6",
+		"@prisma/adapter-pg": "^7.4.2",
+		"@prisma/client": "^7.4.2",
+		"aws-sdk-client-mock": "^4.1.0",
+		"consola": "^3.4.2",
+		"dotenv": "^17.3.1",
+		"hono": "^4.12.3",
+		"node": "^25.7.0",
+		"pg": "^8.19.0",
+		"zod": "^4.3.6"
+	}
 }
