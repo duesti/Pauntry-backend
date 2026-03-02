@@ -42,13 +42,13 @@ class PhotosService {
 		}
 	}
 
-  async getPhoto(key: string) {
-    return await storageService.getObject(key)
-  }
+	async getPhoto(key: string) {
+		return await storageService.getObject(key);
+	}
 
-  async deletePhoto(key: string) {
-    return await storageService.deleteObject(key)
-  }
+	async deletePhoto(key: string) {
+		return await storageService.deleteObject(key);
+	}
 }
 
 export const photosService = new PhotosService();

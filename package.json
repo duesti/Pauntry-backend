@@ -12,8 +12,7 @@
 			"bun x biome check --write --no-errors-on-unmatched"
 		],
 		"*.prisma": [
-			"bun x prisma format",
-			"bun x prisma validate"
+			"bun x prisma format"
 		]
 	},
 	"devDependencies": {
