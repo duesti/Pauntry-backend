@@ -7,7 +7,7 @@ import { handleErrors } from "@/middlewares/error.middleware";
 import { logger } from "@/utils/logger";
 
 class Server {
-	private readonly app: Hono;
+	readonly app: Hono;
 	private readonly router: Hono;
 
 	private readonly port: number;

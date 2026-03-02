@@ -1,0 +1,17 @@
+model Photo {
+  id String @id @default(cuid())
+
+  url      String
+  filename String
+  size     Int
+
+  contentType String @map("content_type")
+
+  albumId String? @map("album_id")
+  album Album? @relation(fields: [albumId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("photos")
+}
