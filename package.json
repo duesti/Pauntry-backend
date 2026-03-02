@@ -5,18 +5,22 @@
 	"private": true,
 	"scripts": {
 		"dev": "bun src/app.ts",
-		"prepare": "husky"
+		"prepare": "husky && husky install"
 	},
 	"lint-staged": {
 		"*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
-			"biome check --write --no-errors-on-unmatched"
+			"bun x biome check --write --no-errors-on-unmatched"
+		],
+		"*.prisma": [
+			"bun x prisma format",
+			"bun x prisma validate"
 		]
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.4",
 		"@types/bun": "latest",
 		"@types/pg": "^8.18.0",
-		"husky": "^9.1.7",
+		"husky": "^8.0.0",
 		"lint-staged": "^16.3.1",
 		"prisma": "^7.4.2",
 		"tsx": "^4.21.0"
