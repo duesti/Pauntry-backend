@@ -13,6 +13,9 @@ const envSchema = z.object({
 	S3_SECRET_KEY: z.string().min(1),
 	S3_BUCKET_NAME: z.string().min(1),
 	S3_PUBLIC_ENDPOINT: z.string().min(1),
+
+	// Postgres db
+	DATABASE_URL: z.string().min(1)
 });
 
 const envParsed = envSchema.safeParse(Bun.env);

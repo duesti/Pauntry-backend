@@ -4,8 +4,7 @@
 	"type": "module",
 	"private": true,
 	"scripts": {
-		"dev": "bun src/app.ts",
-		"prepare": "husky && husky install"
+		"dev": "bun src/app.ts"
 	},
 	"lint-staged": {
 		"*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [

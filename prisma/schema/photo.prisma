@@ -2,7 +2,7 @@ model Photo {
   id String @id @default(cuid())
 
   url      String
-  filename String
+  filename String @unique
   size     Int
 
   contentType String @map("content_type")

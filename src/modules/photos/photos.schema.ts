@@ -23,6 +23,7 @@ const uploadSchema = z.object({
 				`Количество файлов превышает ${uploadFileLimit.MAX_FILES_COUNT}`,
 			),
 	),
+	albumId: z.string()
 });
 
 export { photoSchema, uploadSchema };

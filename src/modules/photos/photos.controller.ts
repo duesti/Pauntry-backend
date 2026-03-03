@@ -8,7 +8,7 @@ import {
 } from "@/utils/http-errors";
 import { uploadLimit } from "./photos.constants";
 import { uploadSchema } from "./photos.schema";
-import { photosService } from "./photos.service";
+import { photoService } from "./photos.service";
 
 const photosController = new Hono();
 
@@ -32,9 +32,9 @@ photosController.post(
 		}
 	}),
 	async (ctx) => {
-		const { photos } = ctx.req.valid("form");
+		const { photos, albumId } = ctx.req.valid("form");
 
-		const savedFiles = await photosService.uploadPhotos(photos);
+		const savedFiles = await photoService.uploadPhotos(photos, albumId);
 
 		return ctx.json(
 			{
@@ -68,7 +68,7 @@ photosController.get(
 
 		return ctx.json({
 			success: true,
-			url: await photosService.getPhoto(s3key),
+			url: await photoService.getPhoto(s3key),
 		});
 	},
 );
@@ -92,7 +92,7 @@ photosController.delete(
 	async (ctx) => {
 		const { s3key } = ctx.req.valid("param");
 
-		await photosService.deletePhoto(s3key);
+		await photoService.deletePhoto(s3key);
 
 		return ctx.json({
 			success: true,

@@ -32,7 +32,8 @@
 			"@/utils/*": ["./src/shared/utils/*"],
 			"@/middlewares/*": ["./src/shared/middlewares/*"],
 			"@/configs/*": ["./src/core/configs/*"],
-			"@/services/*": ["./src/shared/services/*"]
+			"@/services/*": ["./src/shared/services/*"],
+			"@/lib/*": ["./src/shared/lib/*"]
 		}
 	}
 }
