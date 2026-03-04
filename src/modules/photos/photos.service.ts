@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import { extname } from "node:path";
 import { prisma } from "@/lib/prisma";
 import { storageService } from "@/services/storage.service";
+import { handleError } from "@/utils/catch-error";
 import { InternalServerError, NotFoundError } from "@/utils/http-errors";
 import { logger } from "@/utils/logger";
 
@@ -67,11 +68,9 @@ class PhotoService {
 				}),
 			);
 
-			const result = await prisma.photo.createManyAndReturn({
+			return await prisma.photo.createManyAndReturn({
 				data: uploadedPhotos,
 			});
-
-			return result;
 		} catch (e) {
 			if (uploadedPhotos.length > 0) {
 				const keys = uploadedPhotos.map((photo) => photo.filename);
@@ -81,14 +80,7 @@ class PhotoService {
 				);
 			}
 
-			const errorMessage =
-				e instanceof Error ? e.message : "Неизвестная ошибка";
-
-			logger.error(
-				`Ошибка при загрузке объекта в  S3 хранилище: ${errorMessage}`,
-			);
-
-			throw new InternalServerError(errorMessage);
+			handleError(e, "Ошибка при загрузке объекта в S3 хранилище");
 		}
 	}
 
@@ -106,20 +98,13 @@ class PhotoService {
 
 			return photo;
 		} catch (e) {
-			const errorMessage =
-				e instanceof Error ? e.message : "Неизвестная ошибка";
-
-			logger.error(
-				`Ошибка при получении объекта из S3 хранилища: ${errorMessage}`,
-			);
-
-			throw new InternalServerError(errorMessage);
+			handleError(e, "Ошибка при получении объекта из S3 хранилища");
 		}
 	}
 
 	async deletePhoto(key: string) {
 		try {
-      await this.getPhoto(key)
+			await this.getPhoto(key);
 
 			const deletedPhoto = await prisma.photo.delete({
 				where: {
@@ -131,14 +116,7 @@ class PhotoService {
 
 			return deletedPhoto;
 		} catch (e) {
-			const errorMessage =
-				e instanceof Error ? e.message : "Неизвестная ошибка";
-
-			logger.error(
-				`Ошибка при загрузке объекта в  S3 хранилище: ${errorMessage}`,
-			);
-
-			throw new InternalServerError(errorMessage);
+			handleError(e, "Ошибка при удалении объекта из S3 хранилища");
 		}
 	}
 }

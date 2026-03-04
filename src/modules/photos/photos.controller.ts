@@ -1,7 +1,7 @@
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { bodyLimit } from "hono/body-limit";
-import z, { maxSize } from "zod";
+import z from "zod";
 import {
 	BadRequestError,
 	RequestEntityTooLargeError,
@@ -18,7 +18,7 @@ photosController.post(
 		maxSize: uploadLimit.MAX_BODY_SIZE,
 		onError: (ctx) => {
 			throw new RequestEntityTooLargeError(
-				`Размер данных превышает ${maxSize} байт.`,
+				`Размер данных превышает ${uploadLimit.MAX_BODY_SIZE} байт.`,
 				ctx.req.path,
 			);
 		},
